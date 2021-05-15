@@ -39,7 +39,7 @@ class PageBuilder {
 
   private controlIndex: number = 0
 
-  private startChatIndex: number = 0
+  private startCharIndex: number = 0
 
   private endCharIndex: number = 0
 
@@ -95,7 +95,7 @@ class PageBuilder {
     return line
   }
 
-  checkoutShpeBuffer(paragraph: Paragraph) {
+  checkoutShapeBuffer(paragraph: Paragraph) {
     let endIndex = paragraph.getShapeEndPos(this.shapeBufferIndex)
     let startIndex = 0
 
@@ -112,7 +112,7 @@ class PageBuilder {
         pos: startIndex,
       })
 
-      startIndex += (endIndex - this.startChatIndex - startIndex)
+      startIndex += (endIndex - this.startCharIndex - startIndex)
       this.shapeBufferIndex += 1
     }
 
@@ -125,7 +125,7 @@ class PageBuilder {
   }
 
   exitParagraph(paragraph: Paragraph) {
-    this.checkoutShpeBuffer(paragraph)
+    this.checkoutShapeBuffer(paragraph)
     this.currentSection.content.push(this.currentParagraph)
   }
 
@@ -163,7 +163,7 @@ class PageBuilder {
 
     if (lineSegment.y === 0 || lineSegment.y < this.latestY) {
       this.exitPage(paragraph)
-      this.startChatIndex = this.endCharIndex
+      this.startCharIndex = this.endCharIndex
       this.currentHeight = 0
     }
 
@@ -203,7 +203,7 @@ class PageBuilder {
 
         if (tables.length > 1 && tableIndex !== tables.length - 1) {
           this.exitPage(paragraph)
-          this.startChatIndex = this.endCharIndex
+          this.startCharIndex = this.endCharIndex
         }
       })
 
@@ -215,7 +215,7 @@ class PageBuilder {
   visitParagraph = (paragraph: Paragraph) => {
     this.readIndex = 0
     this.controlIndex = 0
-    this.startChatIndex = 0
+    this.startCharIndex = 0
     this.endCharIndex = 0
     this.shapeBufferIndex = 0
     this.currentParagraph = new Paragraph()

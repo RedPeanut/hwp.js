@@ -16,8 +16,23 @@
 
 import parse from './parser'
 import Viewer from './viewer'
+import HWPDocument from './models/document'
+import DocInfo from './models/docInfo'
+import HWPHeader from './models/header'
+import HWPVersion from './models/version'
+import Section from './models/section'
+import DocInfoParser from './parser/DocInfoParser'
+import SectionParser from './parser/SectionParser'
 
 export {
+  HWPDocument,
+  DocInfo,
+  HWPHeader,
+  HWPVersion,
+  Section,
+  DocInfoParser,
+  SectionParser,
+
   parse,
   Viewer,
 }
